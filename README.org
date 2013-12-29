@@ -1,0 +1,70 @@
+* Ghost
+
+Some really lightweight middleware to implement Google's AJAX crawling
+specification [[https://developers.google.com/webmasters/ajax-crawling/][(specification here)]]
+
+Essentially, Google will index a URL with a hash-fragment by
+extracting the fragment and passing it as a query parameter. So - to
+index http://example.com/#key=value, the GoogleBot will request
+http://example.com/?_escaped_fragment=key%3Dvalue. 
+
+** Installation
+
+Add the following to your lein project.clj:
+
+#+BEGIN_SRC clojure
+  [jarohen/ghost-middleware "0.1.0"]
+#+END_SRC
+
+You also need an installation of [[http://phantomjs.org][phantomjs]] - the easiest way to
+install this is using =npm=:
+
+#+BEGIN_SRC sh
+  npm install phantomjs
+#+END_SRC
+
+** Setting up
+
+Wrap any routes that you wish the crawler to index with =wrap-shebang=:
+
+#+BEGIN_SRC clojure
+  (:require [ghost.middleware :refer [wrap-shebang]])
+  
+  (defroutes your-routes
+    (GET "/" []
+      (response (home-page)))
+    ...)
+  
+  (defn app []
+    (-> (your-routes)
+        wrap-shebang))
+  
+#+END_SRC
+
+** HtmlUnit
+
+I tried previously to get this working with [[http://htmlunit.sourceforge.net/][HtmlUnit]] - although failed
+because it was very particular about the JS it would accept (i.e. it
+rejected JavaScript that ran perfectly fine in the browser - see [[http://htmlunit.sourceforge.net/javascript.html][this
+article]] for more details)
+
+If you have  any experience with this,  please let me know  - I'd much
+rather use a Java headless browser than shelling out!
+
+** Bugs/features/suggestions/questions?
+
+Please feel free to submit bug reports/patches etc through the GitHub
+repository in the usual way!
+
+Thanks!
+
+** Changes
+
+The Ghost changelog can be found in CHANGES.org.
+
+** License
+
+Copyright © 2013 James Henderson
+
+Distributed under the Eclipse Public License, the same as Clojure.
+
