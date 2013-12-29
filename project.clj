@@ -1,4 +1,4 @@
-(defproject jarohen/shebang-middleware "0.1.0"
+(defproject jarohen/ghost-middleware "0.1.0"
   :description "Some Ring middleware to handle Google's AJAX shebang spec"
   :url "https://github.com/james-henderson/shebang.git"
   :license {:name "Eclipse Public License"

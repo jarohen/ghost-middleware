@@ -1,4 +1,4 @@
-(ns shebang.middleware
+(ns ghost.middleware
   (:require [clojure.java.shell :refer [sh]]
             [clojure.java.io :as io]
             [ring.util.response :refer [response]]
@@ -44,4 +44,3 @@
     (if-let [fragment (get-in req [:query-params "_escaped_fragment"])]
       (phantom-req req)
       (handler req))))
-
